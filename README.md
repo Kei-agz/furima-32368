@@ -12,41 +12,42 @@
 | born                | date     | null: false                   |
 
 - has_many : products
-- belongs_to : buyers
-- belongs_to : address
+- has_one : buyer
+- has_one : address
 
 
 ## products テーブル
-| Column           | Type       | Options     |
-| name             | string     | null: false |
-| explanation      | text       | null: false |
-| category_id      | integer    | null: false |
-| status_id        | integer    | null: false |
-| delivery_fee_id  | integer    | null: false |
-| delivery_day_id  | integer    | null: false |
-| price_id         | integer    | null: false |
-| sipping_area_id  | integer    | null: false |
-| user             | references |             |
-| buyer            | references |             |
+| Column           | Type       | Options           |
+| name             | string     | null: false       |
+| explanation      | text       | null: false       |
+| category_id      | integer    | null: false       |
+| status_id        | integer    | null: false       |
+| delivery_fee_id  | integer    | null: false       |
+| delivery_day_id  | integer    | null: false       |
+| price            | integer    | null: false       |
+| sipping_area_id  | integer    | null: false       |
+| user             | references | foreign_key: true |
+| buyer            | references | foreign_key: true |
 
-- belongs_to : users
-- belongs_to : buyers
+- belongs_to : user
+- has_one : buyer
 
 ## buyers テーブル
-| Column           | Type       | Options     |
-| user             | references |             |
-| product          | references |             |
+| Column           | Type       | Options           |
+| user             | references | foreign_key: true |
+| product          | references | foreign_key: true |
+| card_number      | integer    | null: false       |
+| card_limit       | date       | null: false       |
 
-- belongs_to : users
-- belongs_to : address
+- belongs_to : user
+- belongs_to : product
 
 ## address テーブル
 | Column          | Type    | Options     |
 | city            | string  | null: false |
 | house_number    | integer | null: false |
 | building_number | integer | null: false |
-| postal_code     | integer | null: false |
-| phone_number    | integer | null: false |
+| postal_code     | string  | null: false |
+| phone_number    | string  | null: false |
 
-- belongs_to : users
-- belongs_to : buyers
+- belongs_to : user
