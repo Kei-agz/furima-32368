@@ -1,4 +1,4 @@
-#　テーブル設計
+# テーブル設計
 
 ## users テーブル
 | Column              | Type     | Options                   |
@@ -15,7 +15,7 @@
 ### Association
 
 - has_many : products
-- has_one : buyer
+- has_many : buyers
 
 
 ## products テーブル
@@ -30,12 +30,11 @@
 | price            | integer    | null: false       |
 | sipping_area_id  | integer    | null: false       |
 | user             | references | foreign_key: true |
-| buyer            | references | foreign_key: true |
 
 ### Association
 
 - belongs_to : user
-- has_many : buyer
+- has_one : buyer
 
 ## buyers テーブル
 | Column           | Type       | Options           |
@@ -47,14 +46,15 @@
 
 - belongs_to : user
 - belongs_to : product
+- has_one :address
 
 ## addresses テーブル
-| Column          | Type    | Options     |
-| --------------- | ------- | ----------- |
-| prefecture_id   | integer | null: false |
-| city            | string  | null: false |
-| house_number    | string  | null: false |
-| building_number | string  |             |
-| postal_code     | string  | null: false |
-| phone_number    | string  | null: false |
-
+| Column          | Type       | Options           |
+| --------------- | ---------- | ----------------- |
+| prefecture_id   | integer    | null: false       |
+| city            | string     | null: false       |
+| house_number    | string     | null: false       |
+| building_number | string     |                   |
+| postal_code     | string     | null: false       |
+| phone_number    | string     | null: false       |
+| buyer           | references | foreign_key: true |
