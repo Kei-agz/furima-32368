@@ -1,24 +1,64 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
+| Column              | Type     | Options                   |
+| ------------------- | -------- | ------------------------- |
+| nickname            | string   | null: false               |
+| email               | string   | null: false, unique: true |
+| encrypted_password  | string   | null: false               |
+| first_name          | string   | null: false               |
+| last_name           | string   | null: false               |
+| first_name_read     | string   | null: false               |
+| last_name_read      | string   | null: false               |
+| born                | date     | null: false               |
 
-Things you may want to cover:
+### Association
 
-* Ruby version
+- has_many : products
+- has_many : buyers
 
-* System dependencies
 
-* Configuration
+## products テーブル
+| Column           | Type       | Options           |
+| ---------------- | ---------- | ----------------- |
+| name             | string     | null: false       |
+| explanation      | text       | null: false       |
+| category_id      | integer    | null: false       |
+| status_id        | integer    | null: false       |
+| delivery_fee_id  | integer    | null: false       |
+| delivery_day_id  | integer    | null: false       |
+| price            | integer    | null: false       |
+| sipping_area_id  | integer    | null: false       |
+| user             | references | foreign_key: true |
 
-* Database creation
+### Association
 
-* Database initialization
+- belongs_to : user
+- has_one : buyer
 
-* How to run the test suite
+## buyers テーブル
+| Column           | Type       | Options           |
+| ---------------- | ---------- | ----------------- |
+| user             | references | foreign_key: true |
+| product          | references | foreign_key: true |
 
-* Services (job queues, cache servers, search engines, etc.)
+### Association
 
-* Deployment instructions
+- belongs_to : user
+- belongs_to : product
+- has_one :address
 
-* ...
+## addresses テーブル
+| Column          | Type       | Options           |
+| --------------- | ---------- | ----------------- |
+| sipping_area_id | integer    | null: false       |
+| city            | string     | null: false       |
+| house_number    | string     | null: false       |
+| building_number | string     |                   |
+| postal_code     | string     | null: false       |
+| phone_number    | string     | null: false       |
+| buyer           | references | foreign_key: true |
+
+### Association
+
+- belongs_to :buyer
