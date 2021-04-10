@@ -51,10 +51,14 @@
 ## addresses テーブル
 | Column          | Type       | Options           |
 | --------------- | ---------- | ----------------- |
-| prefecture_id   | integer    | null: false       |
+| sipping_area_id | integer    | null: false       |
 | city            | string     | null: false       |
 | house_number    | string     | null: false       |
 | building_number | string     |                   |
 | postal_code     | string     | null: false       |
 | phone_number    | string     | null: false       |
 | buyer           | references | foreign_key: true |
+
+### Association
+
+- belongs_to :buyer
