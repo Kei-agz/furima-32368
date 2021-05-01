@@ -20,15 +20,15 @@ RSpec.describe User, type: :model do
   
       context "新規登録がうまくいかない時" do
         it "nicknameが空だと登録できない" do
-          user = User.new(nickname: "", email: "kkk@gmail.com", password: "00000000", password_confirmation: "00000000")
-          user.valid?
-          expect(user.errors.full_messages).to include("Nickname can't be blank")
+          @user.nickname = ''
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Nickname can't be blank")
         end
 
         it "emailが空では登録できない" do
-          user = User.new(nickname: "abe", email: "", password: "00000000", password_confirmation: "00000000")
-          user.valid?
-          expect(user.errors.full_messages).to include("Email can't be blank")
+          @user.email = ''
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Email can't be blank")
         end
 
         it '重複したemailが存在する場合登録できないこと' do
@@ -74,12 +74,14 @@ RSpec.describe User, type: :model do
           @user.password = 'asdzxc'
           @user.password_confirmation = 'asdzxc'
           @user.valid?
+          expect(@user.errors.full_messages).to include("Password is invalid", "Password confirmation is invalid")
         end
 
         it 'passwordが半角英数字混合でなければ登録できない(数字のみ)' do
           @user.password = '123456'
           @user.password_confirmation = '123456'
           @user.valid?
+          expect(@user.errors.full_messages).to include("Password is invalid", "Password confirmation is invalid")
         end
 
         it 'last_nameが空では登録できない' do
