@@ -17,3 +17,4 @@ class Item < ApplicationRecord
    validates :sipping_area_id
 
   end
+end
