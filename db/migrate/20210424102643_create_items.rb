@@ -1,5 +1,5 @@
 class CreateItems < ActiveRecord::Migration[6.0]
-  def change do
+  def change
     create_table :items do |t|
 
       t.string :name, null:false
@@ -10,9 +10,9 @@ class CreateItems < ActiveRecord::Migration[6.0]
       t.integer :sipping_area_id, null: false
       t.integer :delivery_day_id, null: false
       t.integer :price, null: false
-      t.references :user_id
+      t.references :user, foreign_key: true
 
-      t.timestamps, :null:false
+      t.timestamps
     end
   end
 end
