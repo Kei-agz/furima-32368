@@ -4,6 +4,12 @@ class Item < ApplicationRecord
   has_one :buyer
   has_one_attached :image
 
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to_active_hash :category
+  belongs_to_active_hash :status
+  belongs_to_active_hash :delivery_fee
+  belongs_to_active_hash :delivery_day
+  belongs_to_active_hash :sipping_area
 
   with_options presence: true do
     # presence:trueのみ適用されるカラムを書き出す

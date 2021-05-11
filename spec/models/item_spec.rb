@@ -20,17 +20,17 @@ RSpec.describe Item, type: :model do
         end
 
         it "priceが300ちょうどだと出品できること" do
-          @item.price = "300"
+          @item.price = 300
           expect(@item).to be_valid
         end
 
         it "priceが9999999だと出品できること" do
-          @item.price = "9999999"
+          @item.price = 9999999
           expect(@item).to be_valid
         end
 
         it "priceが半角数字だと出品できること" do
-          @item.price ="6000"
+          @item.price =6000
           expect(@item).to be_valid
         end
 
@@ -91,13 +91,13 @@ RSpec.describe Item, type: :model do
         end
 
         it "priceが299以下だと出品できないこと" do
-          @item.price = "299"
+          @item.price = 299
           @item.valid?
           expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
         end
      
         it "priceが10000000だと出品できないこと" do
-          @item.price = "10000000"
+          @item.price = 10000000
           @item.valid?
           expect(@item.errors.full_messages).to include("Price is too long (maximum is 7 characters)", "Price must be less than 10000000")
         end
