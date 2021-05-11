@@ -3,7 +3,6 @@ RSpec.describe Item, type: :model do
   describe '#create' do
     before do
       @item = FactoryBot.build(:item)
-      @item.image = fixture_file_upload("/files/test_image.jpg")
     end
     describe"商品出品" do
       context '商品出品がうまく行く時' do
@@ -12,7 +11,7 @@ RSpec.describe Item, type: :model do
         end
 
         it 'imageが存在すると出品できること' do
-          expect(@product).to be_valid
+          expect(@item).to be_valid
         end
     
         it "nameが40文字でも出品できること" do
@@ -106,7 +105,6 @@ RSpec.describe Item, type: :model do
         it "priceが半角数字でないと出品できないこと" do
           @item.price = "１２７７８"
           @item.valid?
-          binding.pry
           expect(@item.errors.full_messages).to include("Price is too short (minimum is 3 characters)", "Price is not a number")
         end
 
