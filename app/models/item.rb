@@ -1,7 +1,6 @@
 class Item < ApplicationRecord
 
   belongs_to :user
-  has_one :buyer
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -14,12 +13,15 @@ class Item < ApplicationRecord
   with_options presence: true do
     # presence:trueのみ適用されるカラムを書き出す
 
-   validates :explanation
-   validates :category_id
-   validates :status_id
-   validates :delivery_fee_id
-   validates :delivery_day_id
-   validates :sipping_area_id
+    validates :explanation
+
+    with_options numericality: { other_than: 0 } do
+      validates :category_id
+      validates :status_id
+      validates :delivery_fee_id
+      validates :delivery_day_id
+      validates :sipping_area_id
+    end
   end
   validates :name, presence: true, length: { maximum:40 }
   validates :price,  presence: true, length: { minimum: 3, maximum: 7 },numericality: { only_integer: true,

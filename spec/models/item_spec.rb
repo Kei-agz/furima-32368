@@ -108,6 +108,49 @@ RSpec.describe Item, type: :model do
           expect(@item.errors.full_messages).to include("Price is too short (minimum is 3 characters)", "Price is not a number")
         end
 
+        it "priceが半角英字では出品できないこと" do
+          @item.price = "abcff"
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price is too short (minimum is 3 characters)", "Price is not a number")
+        end      
+
+        it "priceが半角英数混合では出品できないこと" do
+          @item.price = "abc22ff"
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price is too short (minimum is 3 characters)", "Price is not a number")
+        end      
+
+        it "category_idが---では出品できないこと" do
+          @item.category_id = 0
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Category must be other than 0")
+        end      
+
+        it "status_idが---では出品できないこと" do
+          @item.status_id = 0
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Status must be other than 0")
+        end    
+
+        it "delivery_fee_idが---では出品できないこと" do
+          @item.delivery_fee_id = 0
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Delivery fee must be other than 0")
+        end
+
+        it "delivery_day_idが---では出品できないこと" do
+          @item.delivery_day_id = 0
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Delivery day must be other than 0")
+        end    
+
+        it "sipping_area_idが---では出品できないこと" do
+          @item.sipping_area_id = 0
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Sipping area must be other than 0")
+        end    
+
+
       end
     end
   end
