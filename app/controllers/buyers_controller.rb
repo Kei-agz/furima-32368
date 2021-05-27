@@ -1,5 +1,6 @@
 class BuyersController < ApplicationController
   def index
+    @form_object = FormObject.new
   end
 
   def new
@@ -7,7 +8,6 @@ class BuyersController < ApplicationController
   end
 
   def create
-    @buyer = Buyer.new(buyer_params)   #「UserDonation」に編集
      if @buyer.valid?
        @buyer.save
        redirect_to action: :index

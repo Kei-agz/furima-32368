@@ -3,6 +3,7 @@ class FormObject
   attr_accessor :sipping_area_id,:city,:house_number,:building_number,:postalcode,:phone_number,:buyer_id,:user_id,:item_id ...
 
 with_options presence: true do
+  
   validates :sipping_area_id
   validates :city
   validates :house_number

@@ -1,5 +1,6 @@
 class Address < ApplicationRecord
   belongs_to :buyer
+  has_one :order
 
   with_options presence: true do
     validates :sipping_area_id
