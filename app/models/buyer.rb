@@ -5,4 +5,7 @@ class Buyer < ApplicationRecord
   has_one :address
   has_many :order
 
+
+  
+
 end

@@ -1,4 +1,6 @@
 class BuyersController < ApplicationController
+  before_action :set_item
+  
   def index
     @form_object = FormObject.new
   end
@@ -8,15 +10,23 @@ class BuyersController < ApplicationController
   end
 
   def create
-     if @buyer.valid?
-       @buyer.save
+    @form_object = FormObject.new(buyer_params)  
+     if @form_object.valid?
+      @form_object.save
        redirect_to action: :index
      else
-       render action: :new
+       render action: :index
      end
+  end
+  private 
 
-     private
-    def buyer_params
-     params.require(:user_address).permit(:nickname, :last_name, :first_name, :last_name_read, :first_name_read, :born)
-    end
+  def buyer_params
+    params.require(:form_object).permit(:sipping_area_id, :city, :house_number, :building_number, :postal_code, :phone_number, :buyer_id).merge(user_id: current_user.id)
+  end
+  
+  
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
 end
