@@ -8,8 +8,6 @@ class BuyersController < ApplicationController
     @form_object = FormObject.new
   end
 
-  def new
-  end
 
   def create
     @form_object = FormObject.new(buyer_params)
@@ -25,7 +23,7 @@ class BuyersController < ApplicationController
   private 
 
   def buyer_params
-    params.require(:form_object).permit(:sipping_area_id, :city, :house_number, :building_number, :postal_code, :phone_number, :price).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:form_object).permit(:sipping_area_id, :city, :house_number, :building_number, :postal_code, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
   
 

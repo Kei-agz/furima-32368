@@ -23,6 +23,11 @@ RSpec.describe Address, type: :model do
         @form_object.phone_number = '11111111111'
         expect(@form_object).to be_valid
       end
+
+      it '建物名が空でも購入できること' do
+        @form_object.building_number = ''
+        expect(@form_object).to be_valid
+      end
     end
 
     context "商品購入がうまくいかない時" do
